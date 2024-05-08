@@ -10,7 +10,6 @@ const baseFlavors = ['Classic', 'Chocolate', 'Red Velvet', 'Brownie'];
 
 const Order = () => {
     const [cheesecake, setCheesecake] = useState({
-        id: '',
         name:'',
         email: '',
         baseFlavor: '',
@@ -31,14 +30,14 @@ const Order = () => {
         setCheesecake(copy);
     }
     const onCheck = topping => {
-        let toppingsList = cheesecake.toppings.includes(topping) ? [...cheesecake.toppings.filter(t => t.topping !== topping)] : [...cheesecake.toppings, topping];
+        let toppingsList = cheesecake.toppings.includes(topping) ? [...cheesecake.toppings.filter(t => t !== topping)] : [...cheesecake.toppings, topping];
         setCheesecake({ ...cheesecake, toppings: toppingsList })
-        console.log(toppingsList);
     }
 
     const onSubmitClick = async () => {
         cheesecake.total = orderTotal;
-        await axios.post('/api/cheesecake/addcheesecake', { ...cheesecake, total: orderTotal, toppings: toppings.map(t => t + ", ").toString() });
+        cheesecake.toppings = cheesecake.toppings.map(t => ' ' + t).toString();
+        await axios.post('/api/cheesecake/addorder', cheesecake);
         navigate('/success');
     }
 
@@ -66,7 +65,7 @@ const Order = () => {
                     </div>
                     <div className="mb-3">
                         <label className="form-label">Toppings (each topping adds an additional $3.95)</label>
-                        {toppings.map(topping => <div className="form-check" onChange={() => onCheck({topping})}>
+                        {toppings.map(topping => <div className="form-check" onChange={() => onCheck(topping)}>
                             <input className="form-check-input" type="checkbox"  />
                             <label className="form-check-label" >{topping}</label>
                         </div>)}                      
@@ -92,7 +91,7 @@ const Order = () => {
                             <div className="card-body">
                                 <h5 className="card-title">Your Custom Cheesecake</h5>
                             <p className="card-text">Base: {cheesecake.baseFlavor}</p>
-                            <p className="card-text">Toppings: {cheesecake.toppings.map(t => t.topping + ", ").toString()}</p>
+                            <p className="card-text">Toppings: {cheesecake.toppings.map(t => ' ' + t).toString()}</p>
                             <p className="card-text">Special Requests: {cheesecake.specialRequests}</p>
                             <p className="card-text">Quantity: {cheesecake.quantity}</p>
                             <p className="card-text">Delivery Date:{dayjs(cheesecake.deliveryDate).format("MM/DD/YYYY")} </p>

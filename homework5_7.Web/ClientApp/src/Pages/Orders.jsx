@@ -3,7 +3,7 @@ import axios from 'axios';
 import CheesecakeRow from './CheesecakeRow';
 
 const Orders = () => {
-    const [Cheesecakes, setCheesecakes] = useState([]);
+    const [cheesecakes, setCheesecakes] = useState([]);
     useEffect(() => {
         const getCheesecakes = async () => {
             const { data } = await axios.get('/api/cheesecake/getall');
@@ -12,8 +12,6 @@ const Orders = () => {
 
         getCheesecakes();
     }, []);
-    console.log(Cheesecakes);
-
     return (
         <div className="container">
             <div className="d-flex justify-content-center">
@@ -30,7 +28,7 @@ const Orders = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {Cheesecakes.map(cheesecake => <CheesecakeRow Cheesecake={cheesecake} key={cheesecake.Id}/>)}
+                        {cheesecakes.map(cheesecake => <CheesecakeRow cheesecake={cheesecake} key={cheesecake.id}/>)}
                     </tbody>
                 </table>
             </div>

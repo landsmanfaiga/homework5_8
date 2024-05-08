@@ -34,10 +34,10 @@ namespace homework5_7.Web.Controllers
 
         [HttpPost]
         [Route("addorder")]
-        public void AddOrder(ViewModel vm)
+        public void AddOrder(Cheesecake cheesecake)
         {
             var repo = new cheesecakeRepository(_connectionString);
-            repo.AddCheesecake(vm.Cheesecake);
+            repo.AddCheesecake(cheesecake);
         }
     }
 }

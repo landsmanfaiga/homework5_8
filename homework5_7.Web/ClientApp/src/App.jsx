@@ -4,7 +4,8 @@ import Layout from './components/Layout';
 import Home from './Pages/Home';
 import Order from './Pages/Order';
 import Orders from './Pages/Orders';
-import OneOrder from './Pages/OneOrder'
+import OneOrder from './Pages/OneOrder';
+import Success from './Pages/Success';
 const App = () => {
     return (
         <Layout>
@@ -12,7 +13,8 @@ const App = () => {
                 <Route path='/' element={<Home />} />
                 <Route path='/order' element={<Order />} />
                 <Route path='/orders' element={<Orders />} />
-                <Route path='/oneorder/:cheesecakeId' element={<OneOrder />} />
+                <Route path='/oneorder/:id' element={<OneOrder />} />
+                <Route path='/success' element={<Success />} />
             </Routes>
         </Layout>
     );
