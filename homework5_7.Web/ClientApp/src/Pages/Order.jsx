@@ -60,7 +60,7 @@ const Order = () => {
                         <label className="form-label">Cheesecake Base Flavor ($49.99)</label>
                         <select className="form-select" name="baseFlavor" onChange={onTextChange}>
                             <option>Choose...</option>
-                            {baseFlavors.map(flavor => <option>{flavor}</option>) }
+                            {baseFlavors.map(flavor => <option key={flavor}>{flavor}</option>) }
                         </select>
                     </div>
                     <div className="mb-3">
@@ -95,7 +95,7 @@ const Order = () => {
                             <p className="card-text">Special Requests: {cheesecake.specialRequests}</p>
                             <p className="card-text">Quantity: {cheesecake.quantity}</p>
                             <p className="card-text">Delivery Date:{dayjs(cheesecake.deliveryDate).format("MM/DD/YYYY")} </p>
-                            <p className="card-text fw-bold">Total: {orderTotal.toFixed(2)}</p>
+                            <p className="card-text fw-bold">Total: ${orderTotal.toFixed(2)}</p>
                             </div>
                     </div>
                 </div>

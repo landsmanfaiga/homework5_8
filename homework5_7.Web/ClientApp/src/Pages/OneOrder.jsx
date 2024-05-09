@@ -6,18 +6,17 @@ import axios from 'axios';
 
 const OneOrder = () => {
     const { id } = useParams();
-    console.log(id);
     const [cheesecake, setCheesecake] = useState({});
     useEffect(() => {
         const getCheesecake = async () => {
             const { data } = await axios.get(`/api/cheesecake/getone?id=${id}`);
             setCheesecake(data);
-            console.log(cheesecake);
         }
-
         getCheesecake();
     }, []);
+
     const {name, email, baseFlavor, toppings, specialRequests, quantity, deliveryDate, total } = cheesecake;
+
     return (
         <div className="container">
             <div className="d-flex align-items-center justify-content-center">
